@@ -1,0 +1,43 @@
+{
+	"name": "jadepress-theme-pi"
+	,"version": "0.0.1"
+	,"description": "jade press default theme"
+	,"main": "index.js"
+	,"scripts": {
+		"test": "mocha"
+	}
+	,"repository": {
+		"type": "git"
+		,"url": "https://github.com/zxdong262/jadepress-theme-pi.git"
+	}
+	,"keywords": [
+		"jadepress",
+		"theme"
+	]
+	,"author": {
+		"name": "ZHAO Xudong"
+		,"email": "zxdong@gmail.com"
+		,"url": "http://html5beta.com"
+	}
+	,"dependencies": {
+		
+	}
+	,"devDependencies": {
+		"mocha": "2.4.5",
+    "gulp": "3.8.11",
+    "gulp-concat": "2.5.2",
+    "gulp-newer": "0.5.0",
+    "gulp-plumber": "1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-stylus": "2.0.2",
+    "gulp-uglify": "1.2.0",
+    "gulp-util": "3.0.5",
+    "gulp-watch": "4.2.4",
+    "run-sequence": "*"
+  }
+	,"license": "MIT"
+	,"bugs": {
+		"url": "https://github.com/zxdong262/jadepress-theme-pi/issues"
+	}
+	,"homepage": "https://github.com/zxdong262/jadepress-theme-pi"
+}

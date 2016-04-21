@@ -1,0 +1,41 @@
+include parts/head1
+meta(name='description', content='#{siteDesc}')
+meta(name='keywords', content='#{siteKeywords}')
+title #{siteName}
+include parts/head2
+#wrapper
+	#content.container
+		.row
+			include parts/nav
+			#main.col-sm-8.col-md-8.col-lg-9.p-y-2.p-x-3
+
+				- if(!posts.length)
+					div no posts
+				.posts.p-y-2
+					- for(var i = 0, len = posts.length;i < len;i ++) {
+						- var post = posts[i]
+						.post.p-y-2
+							h3
+								a(href='#{createUrl(post, host, publicRoute.post)}') #{post.title}
+							hr
+							p.time
+								|at 
+								span.text-muted #{post.createTime}
+								|, in 
+								- var cats0 = post.cats
+								- for(var j = 0, lenj = cats0.length;j < lenj;j ++) {
+									- var cat0 = cats0[j]
+									- if(j)
+										|, 
+									a(href='#{createUrl(cat0, host, publicRoute.cat)}') #{cat0.name}
+								-	}
+							.p-y-1
+							#post-content !{post.html}
+					- }
+
+				- if(total > pageSize)
+					div !{pager}
+				include parts/footer-html
+
+include parts/footer-js
+include parts/footer-end
