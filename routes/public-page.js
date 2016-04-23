@@ -1,27 +1,27 @@
 
 
-module.exports = function(_this) {
+module.exports = function(ext) {
 
 
 'use strict'
+
 
 /**
  * catogory
  */
 
-var _ = _this._
-,local = _this.local
-,setting = _this.setting
-,tools = _this.tools
-,log = _this.log
-,err = _this.err
-,db = _this.db
-,cf = _this.cf
+var _ = ext._
+,local = ext.local
+,setting = ext.setting
+,tools = ext.tools
+,log = ext.log
+,err = ext.err
+,db = ext.db
 ,path = require('path')
-,baseThemeViewPath = _this.baseThemeViewPath
-,Pager = _this.Pager
-,pager = _this.pager
-,getAllCats = _this.getAllCats
+,baseThemeViewPath = ext.baseThemeViewPath
+,Pager = ext.Pager
+,pager = ext.pager
+,getAllCats = ext.getAllCats
 
 var extend = {}
 
@@ -43,12 +43,12 @@ extend.home = function* (next) {
 			createTime: -1
 		}
 
-		let total = yield db.post.count(sea)
-		let posts = yield db.post.find(sea)
-			.then( cf.skip( (page - 1) * pageSize ) )
-			.then( cf.limit(pageSize) )
-			.then( cf.sort(sortOption) )
-			.then( cf.toArray )
+		let total = yield db.collection('post').count(sea)
+		let posts = yield db.collection('post').find(sea)
+			.skip( (page - 1) * pageSize )
+			.limit(pageSize)
+			.sort(sortOption)
+			.toArray()
 
 		let pagerHtml = pager.render({
 			page: page
@@ -94,7 +94,7 @@ extend.post = function* (next) {
 		let user = this.session.user
 		this.local.user = user
 
-		let post = yield db.post.findOne(sea)
+		let post = yield db.collection('post').findOne(sea)
 
 		if(!post) return yield next
 
@@ -130,7 +130,7 @@ extend.cat = function* (next) {
 		let sea = tools.createQueryObj(params, [':_id', ':id', ':slug'])
 		if(!sea) return yield next
 
-		let catObj = yield db.cat.findOne(sea)
+		let catObj = yield db.collection('cat').findOne(sea)
 		if(!catObj) return yield next
 
 		let page = query.page || 1
@@ -149,12 +149,12 @@ extend.cat = function* (next) {
 			createTime: -1
 		}
 
-		let total = yield db.post.count(sea1)
-		let posts = yield db.post.find(sea1)
-			.then( cf.skip( (page - 1) * pageSize ) )
-			.then( cf.limit(pageSize) )
-			.then( cf.sort(sortOption) )
-			.then( cf.toArray )
+		let total = yield db.collection('post').count(sea1)
+		let posts = yield db.collection('post').find(sea1)
+			.skip( (page - 1) * pageSize )
+			.limit(pageSize)
+			.sort(sortOption)
+			.toArray()
 
 		var cats = yield getAllCats()
 
