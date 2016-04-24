@@ -8,7 +8,7 @@
 	}
 	,"repository": {
 		"type": "git"
-		,"url": "https://github.com/zxdong262/jadepress-theme-pi.git"
+		,"url": "https://github.com/jade-press/jadepress-theme-pi.git"
 	}
 	,"keywords": [
 		"jadepress",
@@ -37,7 +37,7 @@
   }
 	,"license": "MIT"
 	,"bugs": {
-		"url": "https://github.com/zxdong262/jadepress-theme-pi/issues"
+		"url": "https://github.com/jade-press/jadepress-theme-pi/issues"
 	}
-	,"homepage": "https://github.com/zxdong262/jadepress-theme-pi"
+	,"homepage": "https://github.com/jade-press/jadepress-theme-pi"
 }
