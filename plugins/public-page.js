@@ -5,13 +5,12 @@ module.exports = function(ext) {
 
 'use strict'
 
-
 /**
  * catogory
  */
 
-var _ = ext._
-,local = ext.local
+var 
+local = ext.local
 ,setting = ext.setting
 ,tools = ext.tools
 ,log = ext.log
@@ -21,7 +20,8 @@ var _ = ext._
 ,baseThemeViewPath = ext.baseThemeViewPath
 ,Pager = ext.Pager
 ,pager = ext.pager
-,getAllCats = ext.getAllCats
+,getCats = ext.getCats
+,getPosts = ext.getPosts
 
 var extend = {}
 
@@ -29,7 +29,6 @@ extend.home = function* (next) {
 
 	try {
 
-		let sea = {}
 		let query = this.query
 		let page = query.page || 1
 		page = parseInt(page, 10) || 1
@@ -39,35 +38,29 @@ extend.home = function* (next) {
 		let user = this.session.user
 		this.local.user = user
 
-		let sortOption = {
-			createTime: -1
-		}
-
-		let total = yield db.collection('post').count(sea)
-		let posts = yield db.collection('post').find(sea)
-			.skip( (page - 1) * pageSize )
-			.limit(pageSize)
-			.sort(sortOption)
-			.toArray()
+		let obj = yield getPosts({
+			page: page
+			,pageSize: pageSize
+		})
 
 		let pagerHtml = pager.render({
 			page: page
 			,pageSize: pageSize
-			,total: total
+			,total: obj.total
 			,url: this.path
 		})
 
-		var cats = yield getAllCats()
+		var objc = yield getCats()
 
-		_.extend(this.local, {
+		Object.assign(this.local, {
 			pager: pagerHtml
 			,pageSize: pageSize
-			,total: total
-			,posts: posts
+			,total: obj.total
+			,posts: obj.posts
 			,themeRes: this.local.host + '/' + setting.theme
 			,publicRoute: setting.publicRoute
 			,createUrl: tools.createUrl
-			,cats: cats
+			,cats: objc.cats
 		})
 
 		this.render(baseThemeViewPath + 'home', this.local)
@@ -94,18 +87,18 @@ extend.post = function* (next) {
 		let user = this.session.user
 		this.local.user = user
 
-		let post = yield db.collection('post').findOne(sea)
+		let post = yield getPosts(sea)
 
 		if(!post) return yield next
 
-		var cats = yield getAllCats()
+		var obj = yield getCats()
 
-		_.extend(this.local, {
+		Object.assign(this.local, {
 			post: post
 			,publicRoute: setting.publicRoute
 			,createUrl:tools.createUrl
 			,themeRes: this.local.host + '/' + setting.theme
-			,cats: cats
+			,cats: obj.cats
 		})
 		
 		this.render(baseThemeViewPath + '/post', this.local)
@@ -130,7 +123,7 @@ extend.cat = function* (next) {
 		let sea = tools.createQueryObj(params, [':_id', ':id', ':slug'])
 		if(!sea) return yield next
 
-		let catObj = yield db.collection('cat').findOne(sea)
+		let catObj = yield getCats(sea)
 		if(!catObj) return yield next
 
 		let page = query.page || 1
@@ -141,46 +134,90 @@ extend.cat = function* (next) {
 		let user = this.session.user
 		this.local.user = user
 
-		let sea1 = {
-			'cats._id': catObj._id
-		}
+		let obj = yield getPosts({
+			page: page
+			,pageSize: pageSize
+			,catId: catObj._id
+		})
 
-		let sortOption = {
-			createTime: -1
-		}
-
-		let total = yield db.collection('post').count(sea1)
-		let posts = yield db.collection('post').find(sea1)
-			.skip( (page - 1) * pageSize )
-			.limit(pageSize)
-			.sort(sortOption)
-			.toArray()
-
-		var cats = yield getAllCats()
+		var objc = yield getCats()
 
 		let pagerHtml = pager.render({
 			page: page
 			,pageSize: pageSize
-			,total: total
+			,total: obj.total
 			,url: this.path
 		})
 
-		_.extend(this.local, {
-			posts: posts
+		Object.assign(this.local, {
+			posts: obj.posts
 			,page: page
 			,pageSize: pageSize
-			,total: total
+			,total: obj.total
 			,cat: catObj
 			,pager: pagerHtml
 			,themeRes: this.local.host + '/' + setting.theme
 			,publicRoute: setting.publicRoute
 			,createUrl: tools.createUrl
-			,cats: cats
+			,cats: objc.cats
 		})
 
-		this.local.posts = posts
-
 		this.render(baseThemeViewPath + 'category', this.local)
+
+	} catch(e) {
+
+		err('failed render cat page', e)
+		this.status = 500
+		this.local.error = e
+		this.render('views/page/500', this.local)
+
+	}
+
+}
+
+extend.search = function* (next) {
+
+	try {
+
+		let query = this.query
+
+		let page = query.page || 1
+		page = parseInt(page, 10) || 1
+		let pageSize = query.pageSize || setting.pageSize
+		pageSize = parseInt(pageSize, 10) || setting.pageSize
+
+		let user = this.session.user
+		this.local.user = user
+
+		let obj = yield getPosts({
+			page: page
+			,pageSize: pageSize
+			,title: query.title
+		})
+
+		var objc = yield getCats()
+
+		let pagerHtml = pager.render({
+			page: page
+			,pageSize: pageSize
+			,total: obj.total
+			,url: this.path
+		})
+
+		Object.assign(this.local, {
+			posts: obj.posts
+			,page: page
+			,pageSize: pageSize
+			,total: obj.total
+			,pager: pagerHtml
+			,themeRes: this.local.host + '/' + setting.theme
+			,publicRoute: setting.publicRoute
+			,createUrl: tools.createUrl
+			,cats: objc.cats
+			,keyword: query.title
+		})
+
+		this.render(baseThemeViewPath + 'search', this.local)
 
 	} catch(e) {
 
