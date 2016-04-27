@@ -1,4 +1,4 @@
 
 exports.priority = 10000
 
-exports.extendPublicRoute = require('./public-page')
+exports['route/public-page.js'] = require('./public-page')
