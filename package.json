@@ -1,6 +1,6 @@
 {
 	"name": "jadepress-theme-pi"
-	,"version": "0.2.0"
+	,"version": "0.3.0"
 	,"description": "jade press default theme"
 	,"main": "index.js"
 	,"scripts": {

@@ -12,6 +12,8 @@ ugly = require('gulp-uglify')
 ,rename = require('gulp-rename')
 ,runSequence = require('run-sequence')
 ,_ = require('lodash')
+,path = require('path')
+,fs = require('fs')
 
 let
 cssFolder = __dirname + '/public/css'
@@ -21,6 +23,21 @@ cssFolder = __dirname + '/public/css'
 	compress: true
 }
 ,uglyOptions = {
+
+}
+
+let config = {}
+let configPath = path.resolve(__dirname, 'gulp-config.js')
+
+try {
+
+	let res = fs.accessSync(configPath)
+	config = require(configPath)
+	console.log('gulp config loaded')
+	
+} catch(e) {
+	console.log(e.stack)
+	console.log('no gulp config')
 
 }
 
@@ -60,6 +77,19 @@ gulp.task('ugly', function() {
 
 })
 
+var exec = require('child_process').exec
+ 
+if(config.syncTo) {
+	gulp.task('cp', function (cb) {
+		var exe = 'rsync -ar --exclude="node_modules/" ' + __dirname + ' ' + config.syncTo + '/node_modules'
+		console.log(exe)
+		exec(exe, function (err, stdout, stderr) {
+			console.log(stdout)
+			console.log(stderr)
+			cb(err)
+		})
+	})
+}
 
 gulp.task('watch',  function () {
 
@@ -71,7 +101,15 @@ gulp.task('watch',  function () {
 		runSequence('ugly')
 	})
 
+	watch([ __dirname + '/**/*.*', __dirname + '/*.*' ], function() {
+		console.log('cp ')
+		runSequence('cp')
+	})
+
 })
+
+
+
 
 gulp.task('default', ['watch'])
 gulp.task('dist', function() {

@@ -21,7 +21,9 @@ include parts/head2
 								a(href='#{createUrl(post, host, publicRoute.post)}') #{post.title}
 							hr
 							p.time
-								|at 
+								|by 
+								span.text-muted #{post.createBy.name}
+								|, at 
 								span.text-muted #{post.createTime}
 								|, in 
 								- var cats0 = post.cats

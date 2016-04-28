@@ -5,10 +5,8 @@
 
 # config etc
 .idea/
-/config.js
-/local/
+/gulp-config.js
 /temp/
-/tab/
 
 # Runtime data
 #pids
