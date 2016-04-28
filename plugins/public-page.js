@@ -25,6 +25,10 @@ local = ext.local
 
 var extend = {}
 
+function buildThemeRes(host) {
+	return host + '/' + (setting.theme.name?setting.theme.name:setting.theme)
+}
+
 extend.home = function* (next) {
 
 	try {
@@ -57,7 +61,7 @@ extend.home = function* (next) {
 			,pageSize: pageSize
 			,total: obj.total
 			,posts: obj.posts
-			,themeRes: this.local.host + '/' + setting.theme
+			,themeRes: buildThemeRes(this.local.host)
 			,publicRoute: setting.publicRoute
 			,createUrl: tools.createUrl
 			,cats: objc.cats
@@ -97,7 +101,7 @@ extend.post = function* (next) {
 			post: post
 			,publicRoute: setting.publicRoute
 			,createUrl:tools.createUrl
-			,themeRes: this.local.host + '/' + setting.theme
+			,themeRes: buildThemeRes(this.local.host)
 			,cats: obj.cats
 		})
 		
@@ -156,7 +160,7 @@ extend.cat = function* (next) {
 			,total: obj.total
 			,cat: catObj
 			,pager: pagerHtml
-			,themeRes: this.local.host + '/' + setting.theme
+			,themeRes: buildThemeRes(this.local.host)
 			,publicRoute: setting.publicRoute
 			,createUrl: tools.createUrl
 			,cats: objc.cats
@@ -210,7 +214,7 @@ extend.search = function* (next) {
 			,pageSize: pageSize
 			,total: obj.total
 			,pager: pagerHtml
-			,themeRes: this.local.host + '/' + setting.theme
+			,themeRes: buildThemeRes(this.local.host)
 			,publicRoute: setting.publicRoute
 			,createUrl: tools.createUrl
 			,cats: objc.cats
