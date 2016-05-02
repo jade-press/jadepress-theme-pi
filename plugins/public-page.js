@@ -22,12 +22,9 @@ local = ext.local
 ,pager = ext.pager
 ,getCats = ext.getCats
 ,getPosts = ext.getPosts
+,buildThemeRes = tools.buildThemeRes
 
 var extend = {}
-
-function buildThemeRes(host) {
-	return host + '/' + (setting.theme.name?setting.theme.name:setting.theme)
-}
 
 extend.home = function* (next) {
 
