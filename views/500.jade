@@ -1,5 +1,5 @@
 include parts/head1
-title 404 - #{siteName}
+title 500 - #{siteName}
 style.
 	.container {
 		max-width: 600px;
@@ -10,9 +10,9 @@ include parts/head2
 	#content.container
 
 		.p-y-3
-		h1 404.
+		h1 500.
 		hr.m-b-2
-		p page not exist.
+		pre #{error?(error.stack || error):''}
 
 		include parts/footer-html
 
