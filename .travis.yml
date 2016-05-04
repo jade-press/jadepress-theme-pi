@@ -22,4 +22,3 @@ before_script:
   - npm install node-gyp@latest
   - npm install -g gulp
   - npm install -g bower
-  - cd node_modules/jade-press & bower install & cd ../..

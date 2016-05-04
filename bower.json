@@ -1,0 +1,32 @@
+{
+  "name": "jadepress-theme-pi",
+  "version": "0.0.1",
+  "homepage": "http://jade-press.org",
+  "author": {
+    "email": "zxdong@gmail.com",
+    "name": "ZHAO Xudong",
+    "url": "http://html5beta.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jade-press/blog.jade-press.org"
+  },
+  "description": "jade-press default theme",
+  "bugs": "https://github.com/zxdong262/jadepress-theme-pi/issues",
+  "main": "app.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "pi",
+    "theme",
+    "jade-press"
+  ],
+  "license": "MIT",
+  "ignore": [
+
+  ],
+  "dependencies": {
+    "jade-press": "*"
+  }
+}
