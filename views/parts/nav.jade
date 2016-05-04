@@ -12,6 +12,13 @@
 				a.font-weight-bold.form-control-lg(href="#{host}") #{siteName}
 				hr
 
+			form(action='#{host}/s')
+				.form-group
+					.input-group
+						input.form-control(name='title', type='search')
+						span.input-group-btn
+							button.btn.btn-secondary(type='submit') search
+
 			- for(var k = 0, lenk = cats.length;k < lenk;k ++) {
 				- var cat1 = cats[k]
 				- var url = createUrl(cat1, host, publicRoute.cat)
