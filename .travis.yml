@@ -14,7 +14,12 @@ addons:
       - libgif-dev 
       - build-essential 
       - g++
+env:
+  - CXX=g++-4.8
+services:
+  - mongodb
 before_script:
+  - npm install node-gyp@latest
   - npm install -g gulp
   - npm install -g bower
   - bower install
