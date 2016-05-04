@@ -1,7 +1,7 @@
 language: node_js
 sudo: required
 node_js:
-  - "4"
+  - "5"
 addons:
   apt:
     sources:
@@ -22,4 +22,4 @@ before_script:
   - npm install node-gyp@latest
   - npm install -g gulp
   - npm install -g bower
-  - bower install
+  - cd node_modules/jade-press & bower install & cd ../..
