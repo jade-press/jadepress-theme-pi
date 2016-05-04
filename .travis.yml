@@ -19,6 +19,4 @@ env:
 services:
   - mongodb
 before_script:
-  - npm install node-gyp@latest
-  - npm install -g gulp
   - npm install -g bower

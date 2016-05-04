@@ -14,6 +14,8 @@ let killProcessByPort = require('./lib/kill-process-by-port').kill
 
 describe(pack.name, function() {
 
+	this.timeout(20000)
+	
 	// after(function() {
 	// 	co(killProcessByPort(port))
 	// })
