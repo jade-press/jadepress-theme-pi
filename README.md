@@ -30,5 +30,3 @@ npm run test
 # if npm install failed
 ```
 
-## todo 
-- search
