@@ -14,6 +14,7 @@ addons:
       - libgif-dev 
       - build-essential 
       - g++-4.8
+      - openjdk-7-jre
 env:
   - CXX=g++-4.8
 services:

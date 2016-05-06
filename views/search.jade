@@ -20,7 +20,7 @@ include parts/head2
 					- for(var i = 0, len = posts.length;i < len;i ++) {
 						- var post = posts[i]
 						.post.p-y-2
-							h3
+							h2
 								a(href='#{createUrl(post, host, publicRoute.post)}') #{post.title}
 							hr
 							p.time
