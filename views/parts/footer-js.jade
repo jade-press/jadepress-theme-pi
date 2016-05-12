@@ -1,5 +1,15 @@
-script(src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js')
-script(src='http://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js')
-script(src='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/bootstrap.min.js')
-script(src='http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js')
+
+- if(usePublicCdn)
+	script(src='//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js')
+	script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js')
+
+- else
+	script(src='#{cdn}/jquery/dist/jquery.min.js')
+	script(src='#{cdn}/tether/dist/js/tether.min.js')
+	script(src='#{cdn}/bootstrap/dist/js/bootstrap.min.js')
+	script(src='#{cdn}/google-code-prettify/bin/prettify.min.js')
+
+
 script(src='#{themeRes}/js/pi.dev.js?#{themeVersion}')
