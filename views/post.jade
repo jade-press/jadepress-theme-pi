@@ -28,6 +28,8 @@ include parts/head2
 							a(href='#{createUrl(cat0, host, publicRoute.cat)}') #{cat0.name}
 
 						-	}
+						|, visit: 
+						span.text-muted #{post.visit}
 
 					.p-y-1
 					#post-content !{post.html}
