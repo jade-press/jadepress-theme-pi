@@ -33,5 +33,5 @@ before_install:
   - sudo apt-get install -y mongodb-org
 before_script:
   - npm install -g bower
-  - bower install jade-press@latest
-  - npm i jade-press
+  - bower install jade-press
+  - npm i jade-press@latest
