@@ -43,7 +43,7 @@
     "selenium-server": "^2.53.0"
   },
   "peerDependencies": {
-    "jade-press": "*"
+    "jade-press": "latest"
   },
   "license": "MIT",
   "bugs": {
