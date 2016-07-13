@@ -1,6 +1,6 @@
 {
   "name": "jadepress-theme-pi",
-  "version": "0.8.12",
+  "version": "0.8.13",
   "description": "jade press default theme",
   "main": "index.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "selenium-server": "2.53.1"
   },
   "peerDependencies": {
-    "jade-press": "0.14.8"
+    "jade-press": "*"
   },
   "license": "MIT",
   "bugs": {
