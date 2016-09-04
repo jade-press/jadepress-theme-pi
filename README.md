@@ -22,9 +22,7 @@ git clone https://github.com/jade-press/jadepress-theme-pi.git
 cd jadepress-theme-pi
 npm install node-gyp -g
 npm install mocha -g
-npm install bower -g
 npm install
-bower install
 npm run test
 
 # if npm install failed
